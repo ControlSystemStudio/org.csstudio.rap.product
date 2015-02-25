@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+
+    <properties>
+        <global-version>4.1.0-SNAPSHOT</global-version>
+        <assembly-version>2.4</assembly-version>
+        <replacer-version>1.4.1</replacer-version>
+        <tycho.version>0.22.0</tycho.version>
+        <tycho-extras.version>0.22.0</tycho-extras.version>
+        <tycho-groupid>org.eclipse.tycho</tycho-groupid>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
+        <baselineMode>fail</baselineMode>
+        <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository</orbit-site>
+    </properties>
+
+    <groupId>org.csstudio</groupId>
+    <artifactId>rap</artifactId>
+    <version>${global-version}</version>
+    <packaging>pom</packaging>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>tycho</id>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>platform-default</id>
+            <activation>
+                <property>
+                    <name>!platform-version-name</name>
+                </property>
+            </activation>
+            <properties>
+                <eclipse-site>http://download.eclipse.org/releases/luna</eclipse-site>
+                <eclipse-update-site>http://download.eclipse.org/eclipse/updates/4.4</eclipse-update-site>
+                <rap-site>http://download.eclipse.org/rt/rap/2.3</rap-site>
+		<rap-incubator-site>http://download.eclipse.org/rt/rap/incubator/nightly/gef/20150122-1538</rap-incubator-site>
+<!--                <rap-incubator-site>http://download.eclipse.org/rt/rap/incubator/nightly/gef</rap-incubator-site> LATEST RAP HAS PROBLEMS-->
+                <platform-version>[4.3,4.4)</platform-version>
+            </properties>
+        </profile>
+        <profile>
+            <id>cs-studio</id>
+            <activation>
+                <property>
+                    <name>!cs-studio</name>
+                </property>
+            </activation>
+            <repositories>
+		<repository>
+                    <id>csstudio-updates</id>
+                    <url>http://download.controlsystemstudio.org/updates/4.1</url>
+                    <layout>p2</layout>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>eclipse</id>
+            <url>${eclipse-site}</url>
+            <layout>p2</layout>
+        </repository>
+        <repository>
+            <id>eclipse-updates</id>
+            <url>${eclipse-update-site}</url>
+            <layout>p2</layout>
+        </repository>
+        <repository>
+            <id>rap</id>
+            <url>${rap-site}</url>
+            <layout>p2</layout>
+        </repository>
+        <repository>
+            <id>rap-incubator</id>
+            <url>${rap-incubator-site}</url>
+            <layout>p2</layout>
+        </repository>
+        <repository>
+            <id>orbit</id>
+            <url>${orbit-site}</url>
+            <layout>p2</layout>
+        </repository>
+    </repositories>
+
+  <modules>
+    <module>org.csstudio.opibuilder.rap.product</module>
+    <module>org.csstudio.trends.databrowser2.rap.product</module>
+    <module>org.csstudio.alarm.beast.ui.rap.product</module>
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>${tycho-groupid}</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>${tycho-groupid}.extras</groupId>
+              <artifactId>tycho-buildtimestamp-jgit</artifactId>
+              <version>${tycho-extras.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <timestampProvider>jgit</timestampProvider>
+            <jgit.ignore>
+              pom.xml
+              .gitignore
+              *.target
+              .metadata
+            </jgit.ignore>
+            <jgit.dirtyWorkingTree>${jgit.dirtyWorkingTree}</jgit.dirtyWorkingTree>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>${tycho-groupid}</groupId>
+          <artifactId>tycho-p2-director-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <executions>
+            <execution>
+              <id>materialize-products</id>
+              <goals>
+                <goal>materialize-products</goal>
+                <goal>archive-products</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        
+        <!-- Remove javax.servlet and osgi.frameworkadd and add servletbridge extensionbundle to config.ini-->
+        <plugin>
+          <groupId>com.google.code.maven-replacer-plugin</groupId>
+          <artifactId>maven-replacer-plugin</artifactId>
+          <version>${replacer-version}</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>replace</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <!-- The bundles.info is not used at the moment, but leave it here since it doesn't hurt anyone-->
+            <includes>
+              <include>target/products/${project.artifactId}/linux/gtk/x86_64/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info</include>
+              <include>target/products/${project.artifactId}/linux/gtk/x86_64/configuration/config.ini</include>
+            </includes>
+            <replacements>
+              <replacement>
+                <token>javax\.servlet.*false</token>
+                <value></value>
+              </replacement>
+              <replacement>
+                <token>reference\\:file\\:javax\.servlet[^@]*@.,</token>
+                <value></value>
+              </replacement>
+              <replacement>
+                <token>osgi.bundles=</token>
+                <value>osgi.bundles=org.eclipse.equinox.servletbridge.extensionbundle@start,</value>
+              </replacement>
+              <replacement>
+                <token>osgi\.framework=.*jar</token>
+                <value></value>
+              </replacement>
+            </replacements>
+            <regexFlags>
+              <regexFlag>CASE_INSENSITIVE</regexFlag>
+              <regexFlag>UNIX_LINES</regexFlag>
+            </regexFlags>
+          </configuration>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${assembly-version}</version>
+          <configuration>
+            <descriptors>
+              <descriptor>../assembly.xml</descriptor>
+            </descriptors>
+            <!-- Configure the war's filename -->
+            <finalName>${war-file}</finalName>
+            <appendAssemblyId>false</appendAssemblyId>
+          </configuration>
+          <executions>
+            <execution>
+              <id>make-assembly</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.7</version>
+          <executions>
+            <execution>
+              <id>copy-wars</id>
+              <phase>verify</phase>
+              <configuration>
+                <failOnError>true</failOnError>
+                <target>
+                  <echo message="Copying product wars into target" />
+		  <mkdir dir="${project.build.directory}/../../wars"/>
+                  <copy verbose="false" todir="${project.build.directory}/../../wars">
+                    <fileset dir="${project.build.directory}">
+                      <include name="*.war" />
+                    </fileset>
+                  </copy>
+                </target>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>${tycho-groupid}</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>${tycho-groupid}</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <dependency-resolution>
+            <extraRequirements>
+            </extraRequirements>
+          </dependency-resolution>
+
+          <filters>
+          </filters>
+
+          <environments>
+              <!-- 
+                In general it doesn't matter what environment is used, but the assembly plugin
+                configuration expects the path to the products to be in the form of linux/gtk/x86_64.
+                If you change the environment, make sure that you update all rap products pom.xml
+              -->
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+          </environments>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>${tycho-groupid}</groupId>
+        <artifactId>tycho-compiler-plugin</artifactId>
+        <version>${tycho.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>${tycho-groupid}</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+            <timestampProvider>jgit</timestampProvider>
+            <jgit.dirtyWorkingTree>${jgit.dirtyWorkingTree}</jgit.dirtyWorkingTree>
+            <jgit.ignore>pom.xml</jgit.ignore>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
