@@ -16,7 +16,7 @@
         <tycho-extras.version>0.22.0</tycho-extras.version>
         <tycho-groupid>org.eclipse.tycho</tycho-groupid>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
+        <jgit.dirtyWorkingTree>error</jgit.dirtyWorkingTree>
         <baselineMode>fail</baselineMode>
         <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository</orbit-site>
     </properties>
