@@ -27,7 +27,7 @@
    </plugins>
 
    <features>
-      <feature id="org.csstudio.opibuilder.rap.feature"/>
+      <feature id="org.csstudio.applications.opibuilder.rap.feature"/>
       <feature id="org.csstudio.archive.reader.rdb.feature"/>
    </features>
 
