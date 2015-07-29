@@ -86,12 +86,12 @@
             <layout>p2</layout>
         </repository>
         <repository>
-            <id>rap-incubator</id>
+            <id>rap-gef</id>
             <url>${rap-gef-site}</url>
             <layout>p2</layout>
         </repository>
         <repository>
-            <id>rap-incubator</id>
+            <id>rap-e4</id>
             <url>${rap-e4-site}</url>
             <layout>p2</layout>
         </repository>
