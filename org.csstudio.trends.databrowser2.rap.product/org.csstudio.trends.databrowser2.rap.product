@@ -38,7 +38,9 @@
       <plugin id="org.antlr.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.apputil" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.apputil.ui" autoStart="true" startLevel="0" />
+      <plugin id="org.csstudio.archive.rdb" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.archive.reader" autoStart="true" startLevel="0" />
+      <plugin id="org.csstudio.archive.reader.rdb" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.archive.vtype" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.autocomplete" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.autocomplete.archive" autoStart="true" startLevel="0" />
