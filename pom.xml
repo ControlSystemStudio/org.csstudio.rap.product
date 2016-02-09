@@ -64,8 +64,13 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>csstudio-updates</id>
-                    <url>http://download.controlsystemstudio.org/updates/${cs-studio.version}</url>
+                    <id>csstudio-core</id>
+                    <url>http://download.controlsystemstudio.org/core/${cs-studio.version}</url>
+                    <layout>p2</layout>
+                </repository>
+                <repository>
+                    <id>csstudio-applications</id>
+                    <url>http://download.controlsystemstudio.org/applications/${cs-studio.version}</url>
                     <layout>p2</layout>
                 </repository>
                 <repository>
