@@ -8,7 +8,7 @@
     <version>1.0.0</version>
   </parent>
   <groupId>org.csstudio</groupId>
-  <artifactId>org.csstudio.jdbc.feature</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <artifactId>org.csstudio.test.feature</artifactId>
+  <version>4.0.0-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>

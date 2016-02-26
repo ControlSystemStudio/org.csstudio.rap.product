@@ -27,9 +27,19 @@
    </plugins>
 
    <features>
-      <feature id="org.csstudio.archive.reader.rdb.feature"/>
-      <feature id="org.csstudio.applications.opibuilder.rap.feature"/>
       <feature id="org.csstudio.jdbc.feature"/>
+      <feature id="org.csstudio.archive.reader.rdb.feature"/>
+      <feature id="org.eclipse.core.rap.feature"/>
+      <feature id="org.csstudio.test.feature"/>
+      <feature id="org.csstudio.core.utility.rap.feature"/>
+      <feature id="org.csstudio.email.feature"/>
+      <feature id="org.csstudio.batik.feature"/>
+      <feature id="org.csstudio.rap.opibuilder.feature"/>
+      <feature id="org.csstudio.applications.opibuilder.rap.feature"/>
+      <feature id="org.csstudio.trends.databrowser2.opiwidget.feature"/>
+      <feature id="org.csstudio.utilities.rap.feature"/>
+      <feature id="org.diirt.feature"/>
+      <feature id="org.eclipse.core.rap.basic.feature"/>
    </features>
 
    <configurations>
@@ -116,6 +126,7 @@
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.contexts" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.di" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.core.di.annotations" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.services" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.ui.model.workbench" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.emf.common" autoStart="true" startLevel="0" />
