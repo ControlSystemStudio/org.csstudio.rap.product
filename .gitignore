@@ -1,5 +1,7 @@
 *CVS/
 .git/*
+.project
+.settings
 
 *~
 *.swp

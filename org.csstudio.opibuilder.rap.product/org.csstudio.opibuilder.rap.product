@@ -99,9 +99,6 @@
       <plugin id="org.csstudio.trends.databrowser2.opiwidget" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.ui.menu" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.utility.batik" autoStart="true" startLevel="0" />
-      <plugin id="org.csstudio.utility.pv" autoStart="true" startLevel="0" />
-      <plugin id="org.csstudio.utility.pv.epics" autoStart="true" startLevel="0" />
-      <plugin id="org.csstudio.utility.pv.simu" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.utility.singlesource" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.utility.singlesource.rap" autoStart="true" startLevel="0" />
       <plugin id="org.csstudio.vtype.pv" autoStart="true" startLevel="0" />
@@ -124,13 +121,20 @@
       <plugin id="org.eclipse.core.expressions" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.core.jobs" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.core.commands" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.contexts" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.di" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.di.annotations" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.core.di.extensions" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.core.services" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.ui.di" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.e4.ui.model.workbench" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.ui.services" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.ui.workbench" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.emf.common" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.emf.ecore" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.emf.ecore.change" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.emf.ecore.xmi" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.console" autoStart="true" startLevel="0" />
